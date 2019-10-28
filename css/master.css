@@ -1,0 +1,139 @@
+/* FONTS */
+@font-face {
+     font-family: trade-gothic-next, sans-serif;
+     font-weight: 400;
+     font-style: normal;
+}
+
+/* BODY */
+body {
+     background-color: #fafafa;
+     color: #1a1a1a;
+     font-family: trade-gothic-next;
+}
+
+div.page_contents {
+     display: flex;
+     flex-flow: column nowrap;
+     justify-content: space-around;
+     align-items: center;
+     width: 100%;
+}
+
+div.page_row {
+     display: flex;
+     flex-flow: row;
+     width: 100%;
+}
+
+div.page_feature {
+     display: flex;
+     flex-flow: column nowrap;
+     justify-content: space-between;
+     align-items: center;
+}
+
+/* HEADER NAVBAR */
+header {
+     display: flex;
+     flex-flow: row nowrap;
+     justify-content: space-between;
+     align-items: center;
+}
+
+#navopen {
+	visibility: hidden;
+	position: fixed;
+	top: 10px;
+	left: 10px;
+	z-index: 1;
+}
+
+#navclose {
+	position: fixed;
+	top: 10px;
+	left: -160px;
+}
+
+nav {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background-color: #1D1D1D;
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	justify-content: center;
+	z-index: 2;
+}
+
+.navlink {
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-family: 'Titillium Web', sans-serif;
+	font-size: 13pt;
+}
+
+/* MOBILE (enables slide-out navbar) */
+
+@media only screen and (max-device-width: 600px) {
+     body { padding-top: 0; }
+
+	header {
+		height: 0px;
+		background-color: #1D1D1D;
+	}
+
+	#navopen, #navclose {
+		visibility: visible;
+		cursor: pointer;
+	}
+
+	#navopen {
+		border-radius: 4px;
+		/* background-color: #1D1D1D; */
+		width: 40px;
+		height: 40px;
+	}
+
+	nav {
+		position: fixed;
+		top: 0;
+		left: -220px;
+		width: 220px;
+		height: 100vh;
+		padding-top: 50px;
+		display: inherit;
+		transition: all 0.75s;
+	}
+
+	#navclose {
+		position: fixed;
+		top: 10px;
+		left: -210px;
+		z-index: 3;
+		transition: all 0.75s;
+	}
+
+	#navopen img, #navclose img {
+		width: 40px;
+		height: 40px;
+	}
+
+	.page_mask {
+	     position: fixed;
+	     left: 0;
+	     right: 0;
+	     bottom: 0;
+	     top: 0;
+		height: 100%;
+		width: 100%;
+	     background-color: rgba(0,0,0,0);
+		transition: background 0.75s;
+		z-index: -1;
+	}
+}
