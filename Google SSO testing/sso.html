@@ -1,0 +1,138 @@
+<!-- <html lang="en">
+  <head>
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="735698212957-dvu2h24tapar68t9f8p7b66uhaamc96f.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+  </head>
+  <body>
+    <div class="g-signin2" data-onsuccess="onSignIn" data-theme="light"></div>
+    <p id="name1"></p>
+    <p id="name2"></p>
+  </body>
+</html> -->
+
+
+
+
+<html lang="en">
+<head>
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="735698212957-dvu2h24tapar68t9f8p7b66uhaamc96f.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+    <!-- <script src="https://apis.google.com/js/api:client.js"></script> -->
+
+
+
+    <style type="text/css">
+        #customBtn {
+          background-color: #555555;
+          color: white;
+          padding: 10px 40px;
+
+          border-radius: 5px;
+          border: solid #555555;
+          box: 1px 1px 1px grey;
+          font-size: 14px;
+          white-space: nowrap;
+          -webkit-transition-duration: 0.4s; /* Safari */
+          transition-duration: 0.4s;
+        }
+        #customBtn:hover {
+          cursor: pointer;
+          background-color: white;
+          color: black;
+        }
+        span.label {
+          font-family: serif;
+          font-weight: normal;
+        }
+
+        span.buttonText {
+          display: inline-block;
+          vertical-align: middle;
+          padding-left: 20px;
+          padding-right: 10px;
+          padding-top: 20px
+          font-size: 14px;
+          font-weight: bold;
+          /* Use the Roboto font that is loaded in the <head> */
+          font-family: 'Roboto', sans-serif;
+        }
+
+        .g-signin2{
+            display: none;
+        }
+    </style>
+</head>
+    <body>
+        <div class="g-signin2" data-onsuccess="onSignIn" data-theme="light"></div>
+        <div class="Sign InOut btn">
+            <button id=customBtn type="button" onclick="signIn()">Sign In</button>
+        </div>
+
+        <p id="f_Name"></p>
+        <p id="l_Name"></p>
+        <p id="u_email"></p>
+
+        <script>
+            var googleUser = {};
+            var startApp = function() {
+            gapi.load('auth2', function(){
+              // Retrieve the singleton for the GoogleAuth library and set up the client.
+              auth2 = gapi.auth2.init({
+                client_id: '735698212957-dvu2h24tapar68t9f8p7b66uhaamc96f.apps.googleusercontent.com',
+                cookiepolicy: 'single_host_origin',
+                // Request scopes in addition to 'profile' and 'email'
+                //scope: 'additional_scope'
+              });
+              // attachSignin(document.getElementById('customBtn'));
+            });
+            };
+
+
+            function signIn() {
+                auth2.signIn()
+                auth2.isSignedIn.listen(afterSignIn)
+
+            }
+            function afterSignIn(successful) {
+              if (successful) {
+                  document.getElementById('customBtn').innerHTML = "Sign Out"
+                  document.getElementById('customBtn').onclick = signOut;
+
+                  // var fullName = profile.getName()
+                  // var firstName = fullName.split(" ")[0];
+                  // var lastName = fullName.split(" ")[1];
+                  // var email = profile.getEmail();
+                  document.getElementById("f_Name").innerHTML = 'State: Signed in';
+                  // document.getElementById("l_Name").innerHTML = 'Last Name: ' + lastName;
+                  // document.getElementById("u_email").innerHTML = 'email: ' + email;
+              }
+            }
+            function onSignIn(googleUser) {
+              var profile = googleUser.getBasicProfile();
+              console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+                console.log('Full Name: ' + profile.getName());
+                console.log('Given Name: ' + profile.getGivenName());
+                console.log('Family Name: ' + profile.getFamilyName());
+                console.log("Image URL: " + profile.getImageUrl());
+                console.log("Email: " + profile.getEmail());
+              afterSignIn(true)
+             }
+
+
+            function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+                console.log('User signed out.');
+                document.getElementById('customBtn').innerHTML = "Sign In"
+                document.getElementById('customBtn').onclick = signIn;
+                document.getElementById("f_Name").innerHTML = 'State: Signed out';
+            });
+            }
+        </script>
+        <script>startApp();</script>
+    </body>
+</html>
