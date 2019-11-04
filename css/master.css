@@ -12,6 +12,44 @@ body {
      font-family: trade-gothic-next;
 }
 
+#customBtn {
+  background-color: white;
+  color: black;
+  width: 20px 40px;
+  border-radius: 20px;
+
+  border: none;
+  font-size: 14px;
+  white-space: nowrap;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+#customBtn:hover {
+  cursor: pointer;
+  background-color: #C4C4C4;
+  color: white;
+}
+span.label {
+  font-family: serif;
+  font-weight: normal;
+}
+
+span.buttonText {
+  display: inline-block;
+  vertical-align: middle;
+  padding-left: 20px;
+  padding-right: 10px;
+  padding-top: 20px
+  font-size: 14px;
+  font-weight: bold;
+  /* Use the Roboto font that is loaded in the <head> */
+  font-family: 'Roboto', sans-serif;
+}
+
+.g-signin2{
+    display: none;
+}
+
 div.page_contents {
      margin-top: 60px;
      display: flex;
