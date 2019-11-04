@@ -5,6 +5,10 @@
 		}
 	}
 
+	$running_distance = 0;
+	$biking_distance = 0;
+	$swimming_distance = 0;
+
 	if (isset($_COOKIE["form_fname"])) {
 		$servername = "pdb35.awardspace.net";
 		$username = "3010888_ironbroncodb";
@@ -13,9 +17,6 @@
 		$first_name = $_COOKIE["form_fname"];
 		$last_name = $_COOKIE["form_lname"];
 		$email = str_replace("%40", "@", $_COOKIE["form_email"]);
-		$running_distance = 0;
-		$biking_distance = 0;
-		$swimming_distance = 0;
 
 		$conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -23,8 +24,8 @@
     			die("Connection failed: " . $conn->connect_error);
 		}
 
-		$sql = "SELECT * FROM `User` WHERE email=" . $email . ";";
-		$result = mysqli_query($conn, $sql);
+		$sql = "SELECT * FROM `User` WHERE email='" . $email . "';";
+		$result = $conn->query($sql);
 
 		if ($result->num_rows > 0) {
 			$row = $result->fetch_assoc();
@@ -35,9 +36,12 @@
 
 		else {
 			$addUserQuery = "INSERT INTO `User` (first_name, last_name, email) VALUES ($first_name, $last_name, $email);";
-			mysqli_query($conn, $addUserQuery);
+			$conn->query($addUserQuery);
 			echo "<script>alert('Account creation successful!');</script>";
 		}
+
+		$conn->close();
+
 	}
 
 ?>
@@ -110,9 +114,16 @@
 			<div class="page_feature">
 				<h2>Enter Distance</h2>
 			<div class="page_feature_content">
-				<p>running</p>
-				<p>cycling</p>
-				<p>swimming</p>
+				<form action="addDistance.php" method="post">
+					<label for="running">Running Distance:</label>
+					<input type="number" name="running" value="">
+					<label for="biking">Biking Distance:</label>
+					<input type="number" name="biking" value="">
+					<label for="swimming">Swimming Distance:</label>
+					<input type="number" name="swimming" value="">
+					<input type="hidden" name="callbackURL" value="./index.php">
+					<input type="submit" name="submit" value="Submit Distances">
+				</form>
 			</div>
 		</div>
 		</div>

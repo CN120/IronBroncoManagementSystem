@@ -146,6 +146,8 @@ nav div {
      margin-right: 10px;
 }
 
+input { display: block; }
+
 /* MOBILE (enables slide-out navbar) */
 
 @media only screen and (max-device-width: 600px) {

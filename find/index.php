@@ -67,7 +67,7 @@
                     <th>Size</th>
                     <th>Members</th>
                </tr>
-               <tr></tr> //DYNAMICALLY FILL CONTENT FROM DB W/ PHP
+               
 
           </table>
 
