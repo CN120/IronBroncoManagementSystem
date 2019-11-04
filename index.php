@@ -34,6 +34,12 @@
 	<div class="g-signin2" data-onsuccess="onSignIn" data-theme="light"></div>
      <div class="page_mask"></div>
 
+	<form id="userInfo" name="userInfo" action="./profile" method="get">
+		<input type="hidden" name="form_fname" id="form_fname" value="">
+		<input type="hidden" name="form_lname" id="form_lname" value="">
+		<input type="hidden" name="form_email" id="form_email" value="">
+	</form>
+
 	<header>
 		<div id="navopen">
 			<img src="./resources/images/navopen_alt.svg" alt="Button: Open Navbar">
@@ -59,6 +65,10 @@
                </div>
 		</nav>
 	</header>
+
+	<!-- <h1>POST Data:</h1>
+	<ul>
+	</ul> -->
 
 </body>
 <!-- <script>
@@ -120,4 +130,6 @@
 </script> -->
 <script type="text/javascript" src="./scripts/sso.js"></script>
 <script type="text/javascript" src="./scripts/navbar.js"></script>
-<script>startApp();</script>
+<script>
+	startApp();
+</script>

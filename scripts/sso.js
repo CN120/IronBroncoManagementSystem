@@ -14,6 +14,7 @@ var googleUser = {};
 
 
 	function signIn() {
+		// startApp();
 		auth2.signIn()
 		auth2.isSignedIn.listen(afterSignIn)
 
@@ -27,7 +28,7 @@ var googleUser = {};
 		  // var firstName = fullName.split(" ")[0];
 		  // var lastName = fullName.split(" ")[1];
 		  // var email = profile.getEmail();
-		  document.getElementById("f_Name").innerHTML = 'State: Signed in';
+		  // document.getElementById("f_Name").innerHTML = 'State: Signed in';
 		  // document.getElementById("l_Name").innerHTML = 'Last Name: ' + lastName;
 		  // document.getElementById("u_email").innerHTML = 'email: ' + email;
 	  }
@@ -40,6 +41,13 @@ var googleUser = {};
 		console.log('Family Name: ' + profile.getFamilyName());
 		console.log("Image URL: " + profile.getImageUrl());
 		console.log("Email: " + profile.getEmail());
+
+		document.getElementById("form_fname").value = profile.getGivenName();
+		document.getElementById("form_lname").value = profile.getFamilyName();
+		document.getElementById("form_email").value = profile.getEmail();
+
+		document.getElementById('userInfo').submit();
+
 	  afterSignIn(true)
 	 }
 
@@ -50,6 +58,6 @@ var googleUser = {};
 		console.log('User signed out.');
 		document.getElementById('customBtn').innerHTML = "Sign In"
 		document.getElementById('customBtn').onclick = signIn;
-		document.getElementById("f_Name").innerHTML = 'State: Signed out';
+		// document.getElementById("f_Name").innerHTML = 'State: Signed out';
 	});
 	}
