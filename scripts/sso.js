@@ -8,7 +8,7 @@ gapi.load('auth2', function(){
     cookiepolicy: 'single_host_origin',
     // Request scopes in addition to 'profile' and 'email'
     //scope: 'additional_scope'
-    }); 
+    });
     attachSignin(document.getElementById('customBtn'));
 });
 };
@@ -26,6 +26,12 @@ auth2.attachClickHandler(element, {},
         console.log("Email: " + profile.getEmail());
         document.getElementById('customBtn').style.display='None';
         document.getElementById('signOutBtn').style.display='block';
+
+        document.getElementById("form_fname").value = profile.getGivenName();
+ 		document.getElementById("form_lname").value = profile.getFamilyName();
+ 		document.getElementById("form_email").value = profile.getEmail();
+ 		document.getElementById('userInfo').submit();
+
     }, function(error) {
         alert(JSON.stringify(error, undefined, 2));
     });

@@ -65,6 +65,7 @@
                <tr>
                     <th>Name</th>
                     <th>Members</th>
+				<th>Join a Team</th>
                </tr>
                <?php
 				$servername = "pdb35.awardspace.net";
@@ -85,16 +86,23 @@
 				$result = $conn->query($sql);
 
 				while($row = $result->fetch_assoc()) {
-			     	echo "<tr><td>" . $row["team_name"]. "</td><td>" . $row["member_1"] . ", " . $row["member_2"] . ", " . $row["member_3"] . "</td></tr>";
+			     	echo "<tr><td>" . $row["team_name"]. "</td><td>" . $row["member_1"] . ", " . $row["member_2"] . ", " . $row["member_3"] . "</td><td>" .
+					"<form name='joinTeam' action='joinTeam.php' method='post'><input type='hidden' name='team_name' value='" . $row["team_name"] . "'><input type='submit' value='Join'></form></td></tr>";
 		    		}
 
 				echo "</table>";
-				echo "";
 
 				$conn->close();
 			?>
 
           </table>
+
+		<h1>Create a Team</h1>
+		<form action="createTeam.php" method="post">
+			<label for="team_name">Team Name:</label>
+			<input type="text" name="team_name" value="">
+			<input type="submit" value="Create Team">
+		</form>
 
 </body>
 

@@ -35,7 +35,7 @@
 		}
 
 		else {
-			$addUserQuery = "INSERT INTO `User` (first_name, last_name, email) VALUES ($first_name, $last_name, $email);";
+			$addUserQuery = "INSERT INTO `User` (first_name, last_name, email) VALUES ('" . $first_name . "', '" . $last_name . "', '" . $email . "');";
 			$conn->query($addUserQuery);
 			echo "<script>alert('Account creation successful!');</script>";
 		}
