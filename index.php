@@ -19,14 +19,12 @@
 	<link rel="stylesheet" type="text/css" href="./css/master.css">
 
      <!-- Scripts -->
+	 <script src="https://apis.google.com/js/api:client.js"></script>
+	 <script src="./scripts/sso.js"></script>
+
 	<!-- <link rel="shortcut icon" type="image/png" href="/resources/0.jpg"/> -->
 	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
-	<meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="735698212957-dvu2h24tapar68t9f8p7b66uhaamc96f.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
 
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-    <!-- <script src="https://apis.google.com/js/api:client.js"></script> -->
 
 </head>
 
@@ -59,9 +57,13 @@
                     <div class="option_button">
                          <p>Enter Distance</p>
                     </div>
-                    <div class="option_button">
-						<button id=customBtn type="button" onclick="signIn()">Sign In</button>
-                    </div>
+					<div class="option_button" id=customBtn>
+				      <span class="buttonText" id="signin">Sign In</span>
+				    </div>
+				    <div class="option_button" id=signOutBtn>
+				      <span class="buttonText" id="signOut" onclick="signOut()">Sign Out</span>
+				    </div>
+
                </div>
 		</nav>
 	</header>
@@ -71,65 +73,5 @@
 	</ul> -->
 
 </body>
-<!-- <script>
-	var googleUser = {};
-	var startApp = function() {
-	gapi.load('auth2', function(){
-	  // Retrieve the singleton for the GoogleAuth library and set up the client.
-	  auth2 = gapi.auth2.init({
-		client_id: '735698212957-dvu2h24tapar68t9f8p7b66uhaamc96f.apps.googleusercontent.com',
-		cookiepolicy: 'single_host_origin',
-		// Request scopes in addition to 'profile' and 'email'
-		//scope: 'additional_scope'
-	  });
-	  // attachSignin(document.getElementById('customBtn'));
-	});
-	};
-
-
-	function signIn() {
-		auth2.signIn()
-		auth2.isSignedIn.listen(afterSignIn)
-
-	}
-	function afterSignIn(successful) {
-	  if (successful) {
-		  document.getElementById('customBtn').innerHTML = "Sign Out"
-		  document.getElementById('customBtn').onclick = signOut;
-
-		  // var fullName = profile.getName()
-		  // var firstName = fullName.split(" ")[0];
-		  // var lastName = fullName.split(" ")[1];
-		  // var email = profile.getEmail();
-		  document.getElementById("f_Name").innerHTML = 'State: Signed in';
-		  // document.getElementById("l_Name").innerHTML = 'Last Name: ' + lastName;
-		  // document.getElementById("u_email").innerHTML = 'email: ' + email;
-	  }
-	}
-	function onSignIn(googleUser) {
-	  var profile = googleUser.getBasicProfile();
-	  console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-		console.log('Full Name: ' + profile.getName());
-		console.log('Given Name: ' + profile.getGivenName());
-		console.log('Family Name: ' + profile.getFamilyName());
-		console.log("Image URL: " + profile.getImageUrl());
-		console.log("Email: " + profile.getEmail());
-	  afterSignIn(true)
-	 }
-
-
-	function signOut() {
-	var auth2 = gapi.auth2.getAuthInstance();
-	auth2.signOut().then(function () {
-		console.log('User signed out.');
-		document.getElementById('customBtn').innerHTML = "Sign In"
-		document.getElementById('customBtn').onclick = signIn;
-		document.getElementById("f_Name").innerHTML = 'State: Signed out';
-	});
-	}
-</script> -->
-<script type="text/javascript" src="./scripts/sso.js"></script>
-<script type="text/javascript" src="./scripts/navbar.js"></script>
-<script>
-	startApp();
-</script>
+<script>startApp();</script>
+</html>

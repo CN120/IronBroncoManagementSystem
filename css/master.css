@@ -148,6 +148,11 @@ nav div {
 
 input { display: block; }
 
+table, th, td, tr {
+     border: 1px solid black;
+     border-collapse: collapse;
+}
+
 /* MOBILE (enables slide-out navbar) */
 
 @media only screen and (max-device-width: 600px) {
