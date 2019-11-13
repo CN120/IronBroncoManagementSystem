@@ -130,9 +130,9 @@ nav div {
 
 .option_button_container {
      display: flex;
-     flex-flow: row nowrap;
+     /* flex-flow: row nowrap; */
      justify-content: space-around;
-     width: 240px;
+     /* width: 240px; */
 }
 
 .option_button p {
@@ -148,15 +148,15 @@ nav div {
     border-radius: 20px;
     border: solid black;
 
-    white-space: nowrap;
-    width: 60px;
+    /* white-space: nowrap; */
+    /* width: 60px; */
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
 }
 
 .option_button:hover {
     cursor: pointer;
-    background-color: white;
+    background-color: #fafafa;
     color: black;
 }
 
