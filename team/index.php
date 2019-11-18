@@ -92,18 +92,19 @@
 
 				$sql = "SELECT FROM `User` WHERE email='{$email}'";
 				$result = $conn->query($sql);
-				$row = $result->fetch_assoc();
+				$row = $result;
 				$team_name = $row["team_name"];
+				echo "<script>alert($team_name);</script>";
 
-				$sql = "SELECT FROM `Team` WHERE team_name='{$}';";
-				$result = $conn->query($sql);
+				// $sql = "SELECT FROM `Team` WHERE team_name='{$}';";
+				// $result = $conn->query($sql);
 
-				while($row = $result->fetch_assoc()) {
-			     	echo "<tr><td>" . $row["team_name"]. "</td><td>" . $row["member_1"] . ", " . $row["member_2"] . ", " . $row["member_3"] . "</td><td>" .
-					"<form name='joinTeam' action='joinTeam.php' method='post'><input type='hidden' name='team_name' value='" . $row["team_name"] . "'><input type='submit' value='Join'></form></td></tr>";
-		    		}
+				// while($row = $result->fetch_assoc()) {
+			     // 	echo "<tr><td>" . $row["team_name"]. "</td><td>" . $row["member_1"] . ", " . $row["member_2"] . ", " . $row["member_3"] . "</td><td>" .
+				// 	"<form name='joinTeam' action='joinTeam.php' method='post'><input type='hidden' name='team_name' value='" . $row["team_name"] . "'><input type='submit' value='Join'></form></td></tr>";
+		    		// }
 
-				echo "</table>";
+				// echo "</table>";
 
 				$conn->close();
 			?>
