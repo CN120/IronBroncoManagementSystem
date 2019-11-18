@@ -61,17 +61,49 @@
 
 	<div class="page_contents">
 		<h1>My Team</h1>
-		<div class="page_row">
-               <div class="page_feature">
-                    <h2>Team Progress</h2>
-     			<div class="page_feature_content">
-     			     <p id="team_running_progress">running: </p>
-					<p id="team_cycling_progress">cycling: </p>
-					<p id="team_swimming_progress">swimming: </p>
-					<p id="team_total_progress">total: </p>
-     			</div>
-               </div>
-			<div class="page_feature">
+		<!-- <div class="page_row"> -->
+               <!-- <div class="page_feature"> -->
+          <h2>Team Progress</h2>
+		<table>
+			<tr>
+				<th>Activity</th>
+				<th>Team Progress</th>
+			</tr>
+			<?php
+				$servername = "pdb35.awardspace.net";
+				$username = "3010888_ironbroncodb";
+				$password = "YJSsQj636HAPZfq";
+				$dbname = "3010888_ironbroncodb";
+				$first_name = $_COOKIE["form_fname"];
+				$last_name = $_COOKIE["form_lname"];
+				$email = str_replace("%40", "@", $_COOKIE["form_email"]);
+
+				$conn = new mysqli($servername, $username, $password, $dbname);
+
+				if ($conn->connect_error) {
+					die("Connection failed: " . $conn->connect_error);
+				}
+
+				$sql = "SELECT FROM `User` WHERE email='{$email}'";
+				$result = $conn->query($sql);
+				$row = $result->fetch_assoc();
+				$team_name = $row["team_name"];
+
+				$sql = "SELECT FROM `Team` WHERE team_name='{$}';";
+				$result = $conn->query($sql);
+
+				while($row = $result->fetch_assoc()) {
+			     	echo "<tr><td>" . $row["team_name"]. "</td><td>" . $row["member_1"] . ", " . $row["member_2"] . ", " . $row["member_3"] . "</td><td>" .
+					"<form name='joinTeam' action='joinTeam.php' method='post'><input type='hidden' name='team_name' value='" . $row["team_name"] . "'><input type='submit' value='Join'></form></td></tr>";
+		    		}
+
+				echo "</table>";
+
+				$conn->close();
+			?>
+		</table>
+               <!-- </div> -->
+			<!-- <div class="page_feature">
 				<h2>Member Contributions</h2>
 			<div class="page_feature_content">
 				<div class="graph">
@@ -90,7 +122,7 @@
 			</div>
 
 			</div>
-		</div>
+		</div> -->
 	</div>
 
 </body>

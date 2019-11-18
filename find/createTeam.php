@@ -14,14 +14,17 @@ if ($conn->connect_error) {
      die("Connection failed: " . $conn->connect_error);
 }
 
-$team = "INSERT INTO `Team` (team_name, member_1) VALUES (\'{$_POST['team_name']}\', \'{$email}\');";
-$output = $conn->query($team);
+$sql = "INSERT INTO `Team` (team_name, member_1) VALUES ('" . $_POST['team_name'] . "', '" . $email . "');";
+$conn->query($sql);
 
-echo "<script>alert($output);</script>";
+$sql = "UPDATE `User` SET team_name='" . $_POST["team_name"] . "' WHERE email='" . $email . "';";
+$conn->query($sql);
+
+// echo "<script>alert($output);</script>";
 
 
-$user = "UPDATE `User` SET team_name=\'{$_POST['team_name']}\' WHERE email=\'{$email}\';";
-$conn->query($user);
+// $user = "UPDATE `User` SET team_name=\'{$_POST['team_name']}\' WHERE email=\'{$email}\';";
+// $conn->query($user);
 
 $conn->close();
 
