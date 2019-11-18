@@ -52,9 +52,15 @@
                     <div class="option_button">
                          <p>Enter Distance</p>
                     </div>
-                    <div class="option_button">
-                         <button id=customBtn type="button" onclick="signIn()">Sign In</button>
+                    <div class="divider"></div>
+					<div class="option_button" id=customBtn>
+				      <span class="buttonText" id="signin">Sign In</span>
+				    </div>
+				    <div class="option_button" id=signOutBtn>
+				      <span class="buttonText" id="signOut" onclick="signOut()">Sign Out</span>
                     </div>
+                    <div class="divider"></div>
+
                </div>
 		</nav>
 	</header>
