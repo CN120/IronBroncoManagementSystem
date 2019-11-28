@@ -87,13 +87,17 @@
      			<a class="navlink" href="../team">My Team</a>
      			<a class="navlink" href=".">My Profile</a>
                </div>
-               <div class="option_button_container">
+			   <div class="option_button_container">
                     <div class="option_button">
                          <p>Enter Distance</p>
                     </div>
-                    <div class="option_button">
-                         <p>Sign Out</p>
-                    </div>
+					<div class="option_button" id=customBtn>
+				      <span class="buttonText" id="signin">Sign In</span>
+				    </div>
+				    <div class="option_button" id=signOutBtn>
+				      <span class="buttonText" id="signOut" onclick="signOut()">Sign Out</span>
+				    </div>
+
                </div>
 		</nav>
 	</header>
