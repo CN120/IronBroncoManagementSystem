@@ -25,7 +25,7 @@ auth2.attachClickHandler(element, {},
         console.log("Image URL: " + profile.getImageUrl());
         console.log("Email: " + profile.getEmail());
         document.getElementById('customBtn').style.display='None';
-        document.getElementById('signOutBtn').style.display='block';
+        document.getElementById('signOutBtn').style.display='inline';
 
         document.getElementById("form_fname").value = profile.getGivenName();
  		document.getElementById("form_lname").value = profile.getFamilyName();
