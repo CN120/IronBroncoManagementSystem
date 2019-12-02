@@ -147,6 +147,8 @@ nav div {
     background-color: black;
     color: #fafafa;
 }
+
+
 #customBtn {
     background-color: royalblue;
     color: #fafafa;
@@ -167,7 +169,13 @@ nav div {
 }
 
 #signOutBtn {
-    display:none;
+    /* display:none; */
+    padding: 10px 10px;
+
+    border-radius: 20px;
+    border: solid black;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
 }
 span.label {
     font-family: serif;

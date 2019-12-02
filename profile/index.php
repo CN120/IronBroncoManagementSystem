@@ -91,9 +91,6 @@
                     <div class="option_button">
                          <p>Enter Distance</p>
                     </div>
-					<div class="option_button" id=customBtn>
-				      <span class="buttonText" id="signin">Sign In</span>
-				    </div>
 				    <div class="option_button" id=signOutBtn>
 				      <span class="buttonText" id="signOut" onclick="signOut()">Sign Out</span>
 				    </div>
@@ -152,4 +149,13 @@
 	</div>
 
 	<script type="text/javascript" src="../scripts/navbar.js"></script>
+	<script type="text/javascript" src="../scripts/sso.js"></script>
+	<script>
+	  function signOut() {
+	    var auth2 = gapi.auth2.getAuthInstance();
+	    auth2.signOut().then(function () {
+	      console.log('User signed out.');
+	    });
+	  }
+	</script>
 </body>
