@@ -116,11 +116,11 @@
 			<div class="page_feature_content">
 				<form action="addDistance.php" method="post">
 					<label for="running">Running Distance:</label>
-					<input type="number" name="running" value="">
+					<input type="number" step="any" min="0" max="52" name="running" placeholder="0.0" value="">
 					<label for="biking">Biking Distance:</label>
-					<input type="number" name="biking" value="">
+					<input type="number" step="any" min="0" max="224" name="biking" placeholder="0.0" value="">
 					<label for="swimming">Swimming Distance:</label>
-					<input type="number" name="swimming" value="">
+					<input type="number" step="any" min="0" max="5" name="swimming" placeholder="0.0" value="">
 					<input type="hidden" name="callbackURL" value="./index.php">
 					<input type="submit" name="submit" value="Submit Distances">
 				</form>

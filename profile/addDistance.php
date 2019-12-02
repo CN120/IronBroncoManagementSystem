@@ -14,7 +14,17 @@ if ($conn->connect_error) {
      die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "UPDATE `User` SET distance_run=" . $_POST["running"] . ", distance_bike=" . $_POST["biking"] . ", distance_swim=" . $_POST["swimming"] . " WHERE email='" . $email . "';";
+$sql = "SELECT * FROM `User` WHERE email='" . $email . "';";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+     $row = $result->fetch_assoc();
+     $running_distance = $_POST["running"] + $row["distance_run"];
+     $biking_distance = $_POST["biking"] + $row["distance_bike"];
+     $swimming_distance = $_POST["swimming"] + $row["distance_swim"];
+}
+
+$sql = "UPDATE `User` SET distance_run=" . $running_distance . ", distance_bike=" . $biking_distance . ", distance_swim=" . $swimming_distance . " WHERE email='" . $email . "';";
 $conn->query($sql);
 
 $conn->close();
