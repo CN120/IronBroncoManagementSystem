@@ -19,6 +19,8 @@ $sql = "SELECT * FROM `Team` WHERE team_name='" . $_POST["team_name"] . "';";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 
+echo "<script>alert('{$row['member_2']}');</script>";
+
 if (empty($row["member_2"])) {
      $sql = "UPDATE `Team` SET member_2='" . $email . "' WHERE team_name='" . $_POST['team_name'] . "';";
 }
