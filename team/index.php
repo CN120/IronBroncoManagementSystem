@@ -66,9 +66,33 @@
 	</header>
 
 	<div class="page_contents">
-		<h1>My Team</h1>
-		<!-- <div class="page_row"> -->
-               <!-- <div class="page_feature"> -->
+		<?php
+		$servername = "pdb35.awardspace.net";
+		$username = "3010888_ironbroncodb";
+		$password = "YJSsQj636HAPZfq";
+		$dbname = "3010888_ironbroncodb";
+		$first_name = $_COOKIE["form_fname"];
+		$last_name = $_COOKIE["form_lname"];
+		$email = str_replace("%40", "@", $_COOKIE["form_email"]);
+
+		$conn = new mysqli($servername, $username, $password, $dbname);
+
+		if ($conn->connect_error) {
+			die("Connection failed: " . $conn->connect_error);
+		}
+
+
+		$sql = "SELECT * FROM `User` WHERE email='$email';";
+		$result = $conn->query($sql);
+		$row = $result->fetch_assoc();
+		$team_name = $row["team_name"];
+
+		if (empty($team_name)) {
+			echo "<script>window.location.href = '../find';</script>";
+		}
+		?>
+
+		<h1>My Team: <?= $team_name ?></h1>
           <h2>Team Progress</h2>
 		<table>
 			<tr>
@@ -76,37 +100,34 @@
 				<th>Team Progress</th>
 			</tr>
 			<?php
-				$servername = "pdb35.awardspace.net";
-				$username = "3010888_ironbroncodb";
-				$password = "YJSsQj636HAPZfq";
-				$dbname = "3010888_ironbroncodb";
-				$first_name = $_COOKIE["form_fname"];
-				$last_name = $_COOKIE["form_lname"];
-				$email = str_replace("%40", "@", $_COOKIE["form_email"]);
+				$sql = "SELECT * FROM `Team` WHERE team_name='$team_name';";
+				$result = $conn->query($sql);
 
-				$conn = new mysqli($servername, $username, $password, $dbname);
+				$total_running = 0.0;
+				$total_biking = 0.0;
+				$total_swimming = 0.0;
 
-				if ($conn->connect_error) {
-					die("Connection failed: " . $conn->connect_error);
+				$row = $result->fetch_assoc();
+				$member_array = array($row['member_1'], $row['member_2'], $row['member_3']);
+
+				foreach ($member_array as $member) {
+					if (empty($member)) { continue; }
+					$sql = "SELECT * FROM `User` WHERE email='" . $member . "';";
+					$result = $conn->query($sql);
+
+					if ($result->num_rows > 0) {
+						$row = $result->fetch_assoc();
+						$total_running += $row["distance_run"];
+						$total_biking += $row["distance_bike"];
+						$total_swimming += $row["distance_swim"];
+					}
 				}
 
-				$sql = "SELECT FROM `User` WHERE email='{$email}'";
-				$result = $conn->query($sql);
-				$row = $result;
-				$team_name = $row["team_name"];
-				echo "<script>alert($team_name);</script>";
-
-				// $sql = "SELECT FROM `Team` WHERE team_name='{$}';";
-				// $result = $conn->query($sql);
-
-				// while($row = $result->fetch_assoc()) {
-			     // 	echo "<tr><td>" . $row["team_name"]. "</td><td>" . $row["member_1"] . ", " . $row["member_2"] . ", " . $row["member_3"] . "</td><td>" .
-				// 	"<form name='joinTeam' action='joinTeam.php' method='post'><input type='hidden' name='team_name' value='" . $row["team_name"] . "'><input type='submit' value='Join'></form></td></tr>";
-		    		// }
-
-				// echo "</table>";
-
 				$conn->close();
+
+				echo "<tr><td>Running</td><td>$total_running</td></tr>";
+				echo "<tr><td>Biking</td><td>$total_biking</td></tr>";
+				echo "<tr><td>Swimming</td><td>$total_swimming</td></tr>";
 			?>
 		</table>
                <!-- </div> -->
