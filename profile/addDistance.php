@@ -24,6 +24,7 @@ if ($result->num_rows > 0) {
      
      if ($row['submitting'] == 0) {
           echo "<script>alert('Your data submission privileges have been disabled. Please contact an event admin for more details.'); window.location.href = './';</script>";
+          exit();
      }
      
      $running_distance = $_POST["running"] + $row["distance_run"];
