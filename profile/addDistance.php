@@ -21,6 +21,11 @@ $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
      $row = $result->fetch_assoc();
+     
+     if ($row['submitting'] == 0) {
+          echo "<script>alert('Your data submission privileges have been disabled. Please contact an event admin for more details.'); window.location.href = './';</script>";
+     }
+     
      $running_distance = $_POST["running"] + $row["distance_run"];
      $biking_distance = $_POST["biking"] + $row["distance_bike"];
      $swimming_distance = $_POST["swimming"] + $row["distance_swim"];

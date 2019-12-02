@@ -18,10 +18,8 @@
      $row = $result->fetch_assoc();
 
      if ($row["admin"] != 1) {
-          echo "<script>alert('You are not authorized to view this page.'); window.location.href = '../profile'</script>";
+          echo "<script>alert('You are not authorized to view this page.'); window.location.href = '../../profile'</script>";
      }
-
-     $conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -35,18 +33,18 @@
      <meta name="author" content="Anthony Fenzl - afenzl@scu.edu">
      <meta name="author" content="Chris Nelson - cnelson@scu.edu">
 	<meta name="description" content="Santa Clara University's Annual Iron Bronco Competition Management Service.">
-	<meta name="og:image" content="../resources/images/SCU.png">
+	<meta name="og:image" content="../../resources/images/SCU.png">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
      <!-- Fonts -->
      <link rel="stylesheet" href="https://use.typekit.net/mmd3tyo.css">
 
      <!-- Styles -->
-	<link rel="stylesheet" type="text/css" href="../css/master.css">
-     <link rel="stylesheet" type="text/css" href="../css/team.css">
+	<link rel="stylesheet" type="text/css" href="../../css/master.css">
+     <link rel="stylesheet" type="text/css" href="../../css/team.css">
 
      <!-- Scripts -->
-	<!-- <link rel="shortcut icon" type="image/png" href="../resources/0.jpg"/> -->
+	<!-- <link rel="shortcut icon" type="image/png" href="../../resources/0.jpg"/> -->
 	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
 	<meta name="google-signin-scope" content="profile email">
     <meta name="google-signin-client_id" content="735698212957-dvu2h24tapar68t9f8p7b66uhaamc96f.apps.googleusercontent.com">
@@ -60,18 +58,18 @@
 
 	<header>
 		<div id="navopen">
-			<img src="../resources/images/navopen_alt.svg" alt="Button: Open Navbar">
+			<img src="../../resources/images/navopen_alt.svg" alt="Button: Open Navbar">
 		</div>
 		<div id="navclose">
-			<img src="../resources/images/navclose.svg" alt="Button: Close Navbar">
+			<img src="../../resources/images/navclose.svg" alt="Button: Close Navbar">
 		</div>
           <nav id="nav">
                <h1 class="IronLogo">Iron Bronco</h1>
                <div>
      			<a class="navlink" href="..">Leaderboard</a>
      			<a class="navlink" href=".">Find a Team</a>
-     			<a class="navlink" href="../team">My Team</a>
-     			<a class="navlink" href="../profile">My Profile</a>
+     			<a class="navlink" href="../../team">My Team</a>
+     			<a class="navlink" href="../../profile">My Profile</a>
                </div>
 			   <div class="option_button_container">
 					<div class="option_button">
@@ -85,30 +83,23 @@
 	</header>
 
 	<div class="page_contents">
-		<h1>Admin Dashboard</h1>
-          <a href="./stats">Export Statistics</a>
-          <a href="./broadcast">Email all participants</a>
-          <a href="./toggle">Enable&#47;Disable Data Submission Privileges</a>
-          <br><br>
-          <div style="max-width:270px;">
-               <form action="wipe.php" method="post">
-                    <p><b>Wipe all</b> teams, recorded distances, and users (except admins):</p>
-                    <label for="adminAccept">Type 'yes' to confirm: </label>
-                    <input type="text" id="adminAccept" name="adminAccept" placeholder="Type 'yes' to wipe" value="">
-                    <input type="submit" name="submitAccept" value="Wipe All Data">
-               </form>
-               <br><br>
-               <form action="editAdmin.php" method="post">
-                    <label for="adminEmail">Make an existing user an admin or remove an existing admin: </label>
-                    <input type="email" id="adminEmail" name="adminEmail" placeholder="joe@school.edu" value="">
-                    <input type="submit" name="submitEmail" value="Make Admin">
-                    <input type="submit" name="removeEmail" value="Remove Admin">
-               </form>
-          </div>
-     </div>
+		<h1>Toggle Data Submission</h1>
+          	<a href="../">&lt;- Back to Admin Dashboard</a>
+          	<form action="toggle.php" method="post">
+				<label for="userEmail">Please enter the email of the user for which you would like to toggle data submission privileges:</label>
+				<input type="email" id="userEmail" name="userEmail" placeholder="joe@school.edu" value="">
+				<input type="submit" name="disableEmail" value="Remove Privileges">
+				<input type="submit" name="enableEmail" value="Give Privileges">
+				<br><br>
+				<p>Alternatively, you can:</p>
+				<input type="submit" name="disableAll" value="Disable All Users">
+				<input type="submit" name="enableAll" value="Enable All Users">
+			</form>
+		<?php $conn->close(); ?>
+	</div>
 </body>
 
-	<script type="text/javascript" src="../scripts/navbar.js"></script>
+	<script type="text/javascript" src="../../scripts/navbar.js"></script>
 
 	<script>
 	  function signOut() {
