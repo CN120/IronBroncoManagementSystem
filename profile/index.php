@@ -165,7 +165,7 @@
 		//   console.log('User signed out.');
 		//   window.location.href = "http://ironbronco.jrcollins.com";
 
-		});
+		//});
 	  }
 	</script>
 </body>
