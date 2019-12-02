@@ -13,12 +13,14 @@ body {
 }
 
 
-
-
 .g-signin2{
-    display: none;
-}
+    width:120px;
+    padding: 10px;
 
+}
+.bronco{
+    padding: 20px;
+}
 div.page_contents {
     margin-top: 60px;
     display: flex;
@@ -147,27 +149,16 @@ nav div {
     background-color: black;
     color: #fafafa;
 }
-#customBtn {
-    background-color: royalblue;
-    color: #fafafa;
+
+
+#signOutBtn {
+    /* display:none; */
     padding: 10px 10px;
 
     border-radius: 20px;
     border: solid black;
-
-    /* white-space: nowrap; */
-    /* width: 60px; */
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
-}
-#customBtn:hover {
-    cursor: pointer;
-    background-color: #fafafa;
-    color: royalblue;
-}
-
-#signOutBtn {
-    display:none;
 }
 span.label {
     font-family: serif;

@@ -30,7 +30,6 @@
 </head>
 
 <body>
-	<div class="g-signin2" data-onsuccess="onSignIn" data-theme="light"></div>
      <div class="page_mask"></div>
 
 	<header>
@@ -48,14 +47,14 @@
      			<a class="navlink" href="../team">My Team</a>
      			<a class="navlink" href="../profile">My Profile</a>
                </div>
-               <div class="option_button_container">
-                    <div class="option_button">
-                         <p>Enter Distance</p>
-                    </div>
-                    <div class="option_button">
-                         <button id=customBtn type="button" onclick="signIn()">Sign In</button>
-                    </div>
-               </div>
+			   <div class="option_button_container">
+					<div class="option_button">
+						 <p>Enter Distance</p>
+					</div>
+				   <div class="option_button" id=signOutBtn>
+					 <span class="buttonText" id="signOut" onclick="signOut()">Sign Out</span>
+				   </div>
+			   </div>
 		</nav>
 	</header>
 
@@ -108,5 +107,12 @@
 
 	<script type="text/javascript" src="../scripts/navbar.js"></script>
 
-	<script type="text/javascript" src="../scripts/sso.js"></script>
-	<script>startApp();</script>
+	<script>
+	  function signOut() {
+	    var auth2 = gapi.auth2.getAuthInstance();
+	    auth2.signOut().then(function () {
+	      console.log('User signed out.');
+	      window.location.href = "http://ironbronco.jrcollins.com";
+	    });
+	  }
+	</script>

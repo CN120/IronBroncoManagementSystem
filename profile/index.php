@@ -65,8 +65,9 @@
 	<link rel="stylesheet" type="text/css" href="../css/master.css">
      <!-- <link rel="stylesheet" type="text/css" href="../css/profile.css"> -->
 
-	<!-- <link rel="shortcut icon" type="image/png" href="../resources/0.jpg"/> -->
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+	 <!-- GOOGLE Stuff -->
+     <script src="https://apis.google.com/js/platform.js" async defer></script>
+     <meta name="google-signin-client_id" content="735698212957-dvu2h24tapar68t9f8p7b66uhaamc96f.apps.googleusercontent.com">
 </head>
 
 <body>
@@ -87,13 +88,14 @@
      			<a class="navlink" href="../team">My Team</a>
      			<a class="navlink" href=".">My Profile</a>
                </div>
-               <div class="option_button_container">
+			   <div class="option_button_container">
                     <div class="option_button">
                          <p>Enter Distance</p>
                     </div>
-                    <div class="option_button">
-                         <p>Sign Out</p>
-                    </div>
+				    <div class="option_button" id=signOutBtn>
+				      <span class="buttonText" id="signOut" onclick="signOut()">Sign Out</span>
+				    </div>
+
                </div>
 		</nav>
 	</header>
@@ -148,4 +150,14 @@
 	</div>
 
 	<script type="text/javascript" src="../scripts/navbar.js"></script>
+	<!-- <script type="text/javascript" src="../scripts/sso.js"></script> -->
+	<script>
+	  function signOut() {
+		var auth2 = gapi.auth2.getAuthInstance();
+		auth2.signOut().then(function () {
+		  console.log('User signed out.');
+		  window.location.href = "http://ironbronco.jrcollins.com";
+		});
+	  }
+	</script>
 </body>
