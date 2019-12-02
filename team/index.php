@@ -26,7 +26,6 @@
 </head>
 
 <body>
-	<div class="g-signin2" data-onsuccess="onSignIn" data-theme="light"></div>
      <div class="page_mask"></div>
 
 	<header>
