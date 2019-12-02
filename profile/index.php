@@ -102,10 +102,10 @@
 
 	<div class="page_contents">
 
-		<h1>My Profile</h1>
+		<h1>Hi, <?= $first_name ?>!</h1>
 		<div class="page_row">
                <div class="page_feature">
-                    <h2>Team Progress</h2>
+                    <h2>My Progress</h2>
      			<div class="page_feature_content">
 	     			<p>running: <?= $running_distance ?></p>
 						<p>cycling: <?= $biking_distance ?></p>

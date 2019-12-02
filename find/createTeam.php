@@ -14,6 +14,14 @@ if ($conn->connect_error) {
      die("Connection failed: " . $conn->connect_error);
 }
 
+$user_team = "SELECT * FROM `User` WHERE email='$email';";
+$user_team_result = $conn->query($user_team);
+$user_team_result_row = $user_team_result->fetch_assoc();
+if (!empty($user_team_result_row["team_name"])) {
+     echo "<script>alert('You are already on a team!'); window.location.href = '../team';</script>";
+     exit();
+}
+
 $sql = "INSERT INTO `Team` (team_name, member_1) VALUES ('" . $_POST['team_name'] . "', '" . $email . "');";
 $conn->query($sql);
 

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,11 +15,6 @@
 	<link rel="stylesheet" type="text/css" href="./css/master.css">
 </head>
 <body>
-    <form id="userInfo" name="userInfo" action="./profile" method="get">
-		<input type="hidden" name="form_fname" id="form_fname" value="">
-		<input type="hidden" name="form_lname" id="form_lname" value="">
-		<input type="hidden" name="form_email" id="form_email" value="">
-	</form>
     <div class="page_contents">
         <h1 class="IronLogo">Iron Bronco</h1>
         <img class = bronco src="./resources/images/bronco.png" alt="SCU Bronco" width="250">
@@ -28,6 +22,14 @@
 	</div>
 
     <script type="text/javascript" src="../scripts/navbar.js"></script>
+
+    <form id="userInfo" name="userInfo" action="./profile" method="get">
+		<input type="hidden" name="form_fname" id="form_fname" value="">
+		<input type="hidden" name="form_lname" id="form_lname" value="">
+		<input type="hidden" name="form_email" id="form_email" value="">
+	</form>
+
+
 
 </body>
 </html>
@@ -45,9 +47,9 @@
         document.getElementById("form_email").value = profile.getEmail();
         document.getElementById('userInfo').submit();
     }
-    function(error) {
-            alert(JSON.stringify(error, undefined, 2));
-    }
+    // function(error) {
+    //         alert(JSON.stringify(error, undefined, 2));
+    // }
 </script>
 
 <!-- <a href="" onclick="signOut();">Sign out</a> -->

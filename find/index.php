@@ -81,7 +81,7 @@
 					die("Connection failed: " . $conn->connect_error);
 				}
 
-				$sql = "SELECT * FROM `Team`;";
+				$sql = "SELECT * FROM `Team` WHERE member_3 IS NULL;";
 				$result = $conn->query($sql);
 
 				while($row = $result->fetch_assoc()) {
