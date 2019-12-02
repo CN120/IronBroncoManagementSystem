@@ -151,25 +151,6 @@ nav div {
 }
 
 
-#customBtn {
-    background-color: royalblue;
-    color: #fafafa;
-    padding: 10px 10px;
-
-    border-radius: 20px;
-    border: solid black;
-
-    /* white-space: nowrap; */
-    /* width: 60px; */
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
-}
-#customBtn:hover {
-    cursor: pointer;
-    background-color: #fafafa;
-    color: royalblue;
-}
-
 #signOutBtn {
     /* display:none; */
     padding: 10px 10px;
