@@ -1,8 +1,11 @@
 <?php
-	if (isset($_GET["form_fname"])) {
-		foreach ($_GET as $key => $value) {
-			setcookie($key, $value, time()+3600, '/');
-		}
+	if ($_COOKIE["reload"] == 0) {
+		setcookie("reload", 1, time()+3600, '/');
+		header("Refresh:0");
+	}
+
+	foreach ($_GET as $key => $value) {
+		setcookie($key, $value, time()+3600, '/');
 	}
 
 	$running_distance = 0;
@@ -29,6 +32,9 @@
 
 		if ($result->num_rows > 0) {
 			$row = $result->fetch_assoc();
+			if ($row["admin"] == 1) {
+				echo "<script>window.location.href = '../admin';</script>";
+			}
 			$running_distance = round($row["distance_run"], 2);
 			$biking_distance = round($row["distance_bike"], 2);
 			$swimming_distance = round($row["distance_swim"], 2);

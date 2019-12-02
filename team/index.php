@@ -89,34 +89,16 @@
 				<th>Team Progress</th>
 			</tr>
 			<?php
+
 				$sql = "SELECT * FROM `Team` WHERE team_name='$team_name';";
 				$result = $conn->query($sql);
-
-				$total_running = 0.0;
-				$total_biking = 0.0;
-				$total_swimming = 0.0;
-
 				$row = $result->fetch_assoc();
-				$member_array = array($row['member_1'], $row['member_2'], $row['member_3']);
-
-				foreach ($member_array as $member) {
-					if (empty($member)) { continue; }
-					$sql = "SELECT * FROM `User` WHERE email='" . $member . "';";
-					$result = $conn->query($sql);
-
-					if ($result->num_rows > 0) {
-						$row = $result->fetch_assoc();
-						$total_running += $row["distance_run"];
-						$total_biking += $row["distance_bike"];
-						$total_swimming += $row["distance_swim"];
-					}
-				}
 
 				$conn->close();
 
-				echo "<tr><td>Running</td><td>$total_running</td></tr>";
-				echo "<tr><td>Biking</td><td>$total_biking</td></tr>";
-				echo "<tr><td>Swimming</td><td>$total_swimming</td></tr>";
+				echo "<tr><td>Running</td><td>{$row['distance_run']}</td></tr>";
+				echo "<tr><td>Biking</td><td>{$row['distance_bike']}</td></tr>";
+				echo "<tr><td>Swimming</td><td>{$row['distance_swim']}</td></tr>";
 			?>
 		</table>
                <!-- </div> -->
