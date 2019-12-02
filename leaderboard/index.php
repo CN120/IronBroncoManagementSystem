@@ -4,19 +4,20 @@
 	<title>SCU Iron Bronco</title>
 
      <!-- Meta Tags -->
-     <meta charset="utf-8">
+    <meta charset="utf-8">
 	<meta name="author" content="Jeffrey Collins - jrcollins@scu.edu">
-     <meta name="author" content="Anthony Fenzl - afenzl@scu.edu">
-     <meta name="author" content="Chris Nelson - cnelson@scu.edu">
+	<meta name="author" content="Anthony Fenzl - afenzl@scu.edu">
+    <meta name="author" content="Chris Nelson - cnelson@scu.edu">
+
 	<meta name="description" content="Santa Clara University's Annual Iron Bronco Competition Management Service.">
 	<meta name="og:image" content="./resources/images/SCU.png">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-     <!-- Fonts -->
-     <link rel="stylesheet" href="https://use.typekit.net/mmd3tyo.css">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://use.typekit.net/mmd3tyo.css">
 
      <!-- Styles -->
-	<link rel="stylesheet" type="text/css" href="./css/master.css">
+	<link rel="stylesheet" type="text/css" href="../css/master.css">
 
      <!-- Scripts -->
 	 <script src="https://apis.google.com/js/api:client.js"></script>
@@ -29,7 +30,6 @@
 </head>
 
 <body>
-	<div class="g-signin2" data-onsuccess="onSignIn" data-theme="light"></div>
      <div class="page_mask"></div>
 
 	<form id="userInfo" name="userInfo" action="./profile" method="get">
@@ -53,13 +53,10 @@
      			<a class="navlink" href="./team">My Team</a>
      			<a class="navlink" href="./profile">My Profile</a>
                </div>
-               <div class="option_button_container">
+			   <div class="option_button_container">
                     <div class="option_button">
                          <p>Enter Distance</p>
                     </div>
-					<div class="option_button" id=customBtn>
-				      <span class="buttonText" id="signin">Sign In</span>
-				    </div>
 				    <div class="option_button" id=signOutBtn>
 				      <span class="buttonText" id="signOut" onclick="signOut()">Sign Out</span>
 				    </div>
@@ -73,5 +70,13 @@
 	</ul> -->
 
 </body>
-<script>startApp();</script>
+<script>
+  function signOut() {
+	var auth2 = gapi.auth2.getAuthInstance();
+	auth2.signOut().then(function () {
+	  console.log('User signed out.');
+	  window.location.href = "http://ironbronco.jrcollins.com";
+	});
+  }
+</script>
 </html>

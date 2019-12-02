@@ -19,18 +19,13 @@
 	<link rel="stylesheet" type="text/css" href="../css/master.css">
      <link rel="stylesheet" type="text/css" href="../css/team.css">
 
-     <!-- Scripts -->
-	<!-- <link rel="shortcut icon" type="image/png" href="../resources/0.jpg"/> -->
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
-	<meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="735698212957-dvu2h24tapar68t9f8p7b66uhaamc96f.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+	 <!-- GOOGLE Stuff -->
+     <script src="https://apis.google.com/js/platform.js" async defer></script>
+     <meta name="google-signin-client_id" content="735698212957-dvu2h24tapar68t9f8p7b66uhaamc96f.apps.googleusercontent.com">
 
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
 </head>
 
 <body>
-	<div class="g-signin2" data-onsuccess="onSignIn" data-theme="light"></div>
      <div class="page_mask"></div>
 
 	<header>
@@ -48,19 +43,13 @@
      			<a class="navlink" href=".">My Team</a>
      			<a class="navlink" href="../profile">My Profile</a>
                </div>
-               <div class="option_button_container">
+			   <div class="option_button_container">
                     <div class="option_button">
                          <p>Enter Distance</p>
                     </div>
-                    <div class="divider"></div>
-					<div class="option_button" id=customBtn>
-				      <span class="buttonText" id="signin">Sign In</span>
-				    </div>
 				    <div class="option_button" id=signOutBtn>
 				      <span class="buttonText" id="signOut" onclick="signOut()">Sign Out</span>
-                    </div>
-                    <div class="divider"></div>
-
+				    </div>
                </div>
 		</nav>
 	</header>
@@ -154,8 +143,16 @@
 	</div>
 
 </body>
+</html>
+<script type="text/javascript" src="../scripts/navbar.js"></script>
 
-	<script type="text/javascript" src="../scripts/navbar.js"></script>
-
-	<script type="text/javascript" src="../scripts/sso.js"></script>
-	<script>startApp();</script>
+<!-- <script type="text/javascript" src="../scripts/sso.js"></script> -->
+<script>
+  function signOut() {
+	var auth2 = gapi.auth2.getAuthInstance();
+	auth2.signOut().then(function () {
+	  console.log('User signed out.');
+	  window.location.href = "http://ironbronco.jrcollins.com";
+	});
+  }
+</script>
