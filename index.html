@@ -14,8 +14,6 @@
     <link rel="stylesheet" href="https://use.typekit.net/mmd3tyo.css">
     <!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="./css/master.css">
-    <!-- Script -->
-    <script src="./scripts/sso.js"></script>
 </head>
 <body>
     <form id="userInfo" name="userInfo" action="./profile" method="get">
@@ -25,7 +23,7 @@
 	</form>
     <div class="page_contents">
         <h1 class="IronLogo">Iron Bronco</h1>
-        <img class = bronco src="./resources/images/bronco.png" alt="SCU Bronco" width="200">
+        <img class = bronco src="./resources/images/bronco.png" alt="SCU Bronco" width="250">
         <div class="g-signin2" data-theme="dark" data-onsuccess="onSignIn"></div>
 	</div>
 
@@ -33,23 +31,27 @@
 
 </body>
 </html>
+<script src="./scripts/sso.js"></script>
+
 <script>
     function onSignIn(googleUser) {
         var profile = googleUser.getBasicProfile();
-        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        console.log('ID: ' + profile.getId());
         console.log('Name: ' + profile.getName());
         console.log('Image URL: ' + profile.getImageUrl());
-        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+        console.log('Email: ' + profile.getEmail());
         document.getElementById("form_fname").value = profile.getGivenName();
         document.getElementById("form_lname").value = profile.getFamilyName();
         document.getElementById("form_email").value = profile.getEmail();
         document.getElementById('userInfo').submit();
     }
-
+    function(error) {
+            alert(JSON.stringify(error, undefined, 2));
+    }
 </script>
 
-<!-- <a href="" onclick="signOut();">Sign out</a>
-<script>
+<!-- <a href="" onclick="signOut();">Sign out</a> -->
+<!-- <script>
   function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
