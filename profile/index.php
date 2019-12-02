@@ -29,9 +29,9 @@
 
 		if ($result->num_rows > 0) {
 			$row = $result->fetch_assoc();
-			$running_distance = $row["distance_run"];
-			$biking_distance = $row["distance_bike"];
-			$swimming_distance = $row["distance_swim"];
+			$running_distance = round($row["distance_run"], 2);
+			$biking_distance = round($row["distance_bike"], 2);
+			$swimming_distance = round($row["distance_swim"], 2);
 		}
 
 		else {
