@@ -2,8 +2,6 @@
 <html>
 <head>
 	<title>Sign In Page</title>
-
-
 	<meta charset="utf-8">
 	<meta name="author" content="Jeffrey Collins - jrcollins@scu.edu">
 	<meta name="author" content="Anthony Fenzl - afenzl@scu.edu">

@@ -156,6 +156,7 @@
 	    auth2.signOut().then(function () {
 	      console.log('User signed out.');
 	    });
+		window.location.href = "../index.html";
 	  }
 	</script>
 </body>
