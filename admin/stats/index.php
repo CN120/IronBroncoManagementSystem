@@ -72,9 +72,6 @@
      			<a class="navlink" href="../../profile">My Profile</a>
                </div>
 			   <div class="option_button_container">
-					<div class="option_button">
-						 <p>Enter Distance</p>
-					</div>
 				   <div class="option_button" id=signOutBtn>
 					 <span class="buttonText" id="signOut" onclick="signOut()">Sign Out</span>
 				   </div>
