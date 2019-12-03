@@ -95,9 +95,11 @@
      			<a class="navlink" href=".">My Profile</a>
                </div>
 			   <div class="option_button_container">
-                    <div class="option_button">
-                         <p>Enter Distance</p>
-                    </div>
+				   <a href="../profile">
+   					  <div class="option_button">
+   						   <p>Enter Distance</p>
+   					  </div>
+   				  </a>
 				    <div class="option_button" id=signOutBtn>
 				      <span class="buttonText" id="signOut" onclick="signOut()">Sign Out</span>
 				    </div>

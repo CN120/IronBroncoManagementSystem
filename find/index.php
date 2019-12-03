@@ -48,9 +48,11 @@
      			<a class="navlink" href="../profile">My Profile</a>
                </div>
 			   <div class="option_button_container">
-					<div class="option_button">
-						 <p>Enter Distance</p>
-					</div>
+				   <a href="../profile">
+						<div class="option_button">
+							 <p>Enter Distance</p>
+						</div>
+					</a>
 				   <div class="option_button" id=signOutBtn>
 					 <span class="buttonText" id="signOut" onclick="signOut()">Sign Out</span>
 				   </div>
@@ -98,8 +100,9 @@
 
 		<h1>Create a Team</h1>
 		<form action="createTeam.php" method="post">
+			<p>Your team name must be alphanumeric.</p>
 			<label for="team_name">Team Name:</label>
-			<input type="text" name="team_name" value="">
+			<input type="text" pattern="^\w+$" name="team_name" value="">
 			<input type="submit" value="Create Team">
 		</form>
 

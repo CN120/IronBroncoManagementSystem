@@ -21,6 +21,9 @@ body {
 .bronco{
     padding: 20px;
 }
+
+a { text-decoration: none; }
+
 div.page_contents {
     margin-top: 60px;
     display: flex;

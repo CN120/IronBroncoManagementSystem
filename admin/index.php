@@ -68,10 +68,6 @@
           <nav id="nav">
                <h1 class="IronLogo">Iron Bronco</h1>
                <div>
-
-     			<a class="navlink" href=".">Find a Team</a>
-     			<a class="navlink" href="../team">My Team</a>
-     			<a class="navlink" href="../profile">My Profile</a>
                </div>
 			   <div class="option_button_container">
 				   <div class="option_button" id=signOutBtn>
@@ -84,7 +80,7 @@
 	<div class="page_contents">
 		<h1>Admin Dashboard</h1>
           <a href="./stats">Export Statistics</a>
-          <!-- <a href="./broadcast">Email all participants</a> -->	
+          <!-- <a href="./broadcast">Email all participants</a> -->
           <a href="./toggle">Enable&#47;Disable Data Submission Privileges</a>
           <br><br>
           <div style="max-width:270px;">
