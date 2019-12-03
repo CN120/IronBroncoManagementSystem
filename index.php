@@ -39,19 +39,31 @@
 
 <script>
     function onSignIn(googleUser) {
+        var od_token = googleUser.getAuthResponse().id_token;
+        var auth2 = gapi.auth2.getAuthInstance();
         var profile = googleUser.getBasicProfile();
+        auth2.disconnect();
         console.log('ID: ' + profile.getId());
         console.log('Name: ' + profile.getName());
         console.log('Image URL: ' + profile.getImageUrl());
         console.log('Email: ' + profile.getEmail());
-        document.getElementById("form_fname").value = profile.getGivenName();
-        document.getElementById("form_lname").value = profile.getFamilyName();
-        document.getElementById("form_email").value = profile.getEmail();
-        document.getElementById('userInfo').submit();
+        var email = profile.getEmail();
+        if (email.includes("scu.edu")){
+            document.getElementById("form_fname").value = profile.getGivenName();
+            document.getElementById("form_lname").value = profile.getFamilyName();
+            document.getElementById("form_email").value = profile.getEmail();
+            document.getElementById('userInfo').submit();
+        } else{
+            email='';
+            window.alert("Please use your SCU google apps login");
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut();
+            location.reload();
+        }
+
+
+
     }
-    // function(error) {
-    //         alert(JSON.stringify(error, undefined, 2));
-    // }
 </script>
 
 <!-- <a href="" onclick="signOut();">Sign out</a> -->

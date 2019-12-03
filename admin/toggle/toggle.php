@@ -14,8 +14,8 @@ $sql = "UPDATE User SET submitting=";
 
 if (isset($_POST['enableEmail'])) $sql .= "1 WHERE email='{$_POST['userEmail']}';";
 if (isset($_POST['disableEmail'])) $sql .= "0 WHERE email='{$_POST['userEmail']}';";
-if (isset($_POST['enableALL'])) $sql .= "1 WHERE 1;";
-if (isset($_POST['disableALL'])) $sql .= "0 WHERE 1;";
+if (isset($_POST['enableAll'])) $sql .= "1 WHERE TRUE;";
+if (isset($_POST['disableAll'])) $sql .= "0 WHERE TRUE;";
 
 $conn->query($sql);
 

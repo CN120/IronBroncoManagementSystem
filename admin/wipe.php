@@ -14,6 +14,9 @@ if ($_POST['adminAccept'] == 'yes') {
      $sql = "DELETE FROM User WHERE admin<>1;";
      $conn->query($sql);
 
+     $sql = "UPDATE User SET team_name=NULL WHERE 1;";
+     $conn->query($sql);
+
      $sql = "DELETE FROM Team WHERE 1;";
      $conn->query($sql);
 }

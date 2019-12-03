@@ -10,7 +10,7 @@ if ($conn->connect_error) {
      die("Connection failed: " . $conn->connect_error);
 }
 
-if (isset($_POST['makeAdmin'])) {
+if (isset($_POST['submitEmail'])) {
      $sql = "UPDATE User SET admin=1 WHERE email='{$_POST['adminEmail']}';";
      $conn->query($sql);
 }
