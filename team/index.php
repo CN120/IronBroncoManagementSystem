@@ -131,7 +131,7 @@
 <!-- <script type="text/javascript" src="../scripts/sso.js"></script> -->
 <script>
   function signOut() {
-	window.location.replace("https://appengine.google.com/_ah/logout?continue=http://ironbronco.jrcollins.com")
+	window.location.href = "https://appengine.google.com/_ah/logout?continue=http://ironbronco.jrcollins.com";
 	});
   }
 </script>
