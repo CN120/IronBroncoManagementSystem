@@ -48,7 +48,7 @@
           <nav id="nav">
                <h1 class="IronLogo">Iron Bronco</h1>
                <div>
-     			<a class="navlink" href=".">Leaderboard</a>
+
      			<a class="navlink" href="./find">Find a Team</a>
      			<a class="navlink" href="./team">My Team</a>
      			<a class="navlink" href="./profile">My Profile</a>
