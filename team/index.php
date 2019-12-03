@@ -19,18 +19,13 @@
 	<link rel="stylesheet" type="text/css" href="../css/master.css">
      <link rel="stylesheet" type="text/css" href="../css/team.css">
 
-     <!-- Scripts -->
-	<!-- <link rel="shortcut icon" type="image/png" href="../resources/0.jpg"/> -->
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
-	<meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="735698212957-dvu2h24tapar68t9f8p7b66uhaamc96f.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+	 <!-- GOOGLE Stuff -->
+     <script src="https://apis.google.com/js/platform.js" async defer></script>
+     <meta name="google-signin-client_id" content="735698212957-dvu2h24tapar68t9f8p7b66uhaamc96f.apps.googleusercontent.com">
 
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
 </head>
 
 <body>
-	<div class="g-signin2" data-onsuccess="onSignIn" data-theme="light"></div>
      <div class="page_mask"></div>
 
 	<header>
@@ -43,32 +38,52 @@
           <nav id="nav">
                <h1 class="IronLogo">Iron Bronco</h1>
                <div>
-     			<a class="navlink" href="..">Leaderboard</a>
+
      			<a class="navlink" href="../find">Find a Team</a>
      			<a class="navlink" href=".">My Team</a>
      			<a class="navlink" href="../profile">My Profile</a>
                </div>
-               <div class="option_button_container">
-                    <div class="option_button">
-                         <p>Enter Distance</p>
-                    </div>
-                    <div class="divider"></div>
-					<div class="option_button" id=customBtn>
-				      <span class="buttonText" id="signin">Sign In</span>
-				    </div>
+			   <div class="option_button_container">
+				   <a href="../profile">
+   					  <div class="option_button">
+   						   <p>Enter Distance</p>
+   					  </div>
+   				  </a>
 				    <div class="option_button" id=signOutBtn>
 				      <span class="buttonText" id="signOut" onclick="signOut()">Sign Out</span>
-                    </div>
-                    <div class="divider"></div>
-
+				    </div>
                </div>
 		</nav>
 	</header>
 
 	<div class="page_contents">
-		<h1>My Team</h1>
-		<!-- <div class="page_row"> -->
-               <!-- <div class="page_feature"> -->
+		<?php
+		$servername = "pdb35.awardspace.net";
+		$username = "3010888_ironbroncodb";
+		$password = "YJSsQj636HAPZfq";
+		$dbname = "3010888_ironbroncodb";
+		$first_name = $_COOKIE["form_fname"];
+		$last_name = $_COOKIE["form_lname"];
+		$email = str_replace("%40", "@", $_COOKIE["form_email"]);
+
+		$conn = new mysqli($servername, $username, $password, $dbname);
+
+		if ($conn->connect_error) {
+			die("Connection failed: " . $conn->connect_error);
+		}
+
+
+		$sql = "SELECT * FROM `User` WHERE email='$email';";
+		$result = $conn->query($sql);
+		$row = $result->fetch_assoc();
+		$team_name = $row["team_name"];
+
+		if (empty($team_name)) {
+			echo "<script>window.location.href = '../find';</script>";
+		}
+		?>
+
+		<h1>My Team: <?= $team_name ?></h1>
           <h2>Team Progress</h2>
 		<table>
 			<tr>
@@ -76,36 +91,16 @@
 				<th>Team Progress</th>
 			</tr>
 			<?php
-				$servername = "pdb35.awardspace.net";
-				$username = "3010888_ironbroncodb";
-				$password = "YJSsQj636HAPZfq";
-				$dbname = "3010888_ironbroncodb";
-				$first_name = $_COOKIE["form_fname"];
-				$last_name = $_COOKIE["form_lname"];
-				$email = str_replace("%40", "@", $_COOKIE["form_email"]);
 
-				$conn = new mysqli($servername, $username, $password, $dbname);
-
-				if ($conn->connect_error) {
-					die("Connection failed: " . $conn->connect_error);
-				}
-
-				$sql = "SELECT FROM `User` WHERE email='{$email}'";
+				$sql = "SELECT * FROM `Team` WHERE team_name='$team_name';";
 				$result = $conn->query($sql);
 				$row = $result->fetch_assoc();
-				$team_name = $row["team_name"];
-
-				$sql = "SELECT FROM `Team` WHERE team_name='{$}';";
-				$result = $conn->query($sql);
-
-				while($row = $result->fetch_assoc()) {
-			     	echo "<tr><td>" . $row["team_name"]. "</td><td>" . $row["member_1"] . ", " . $row["member_2"] . ", " . $row["member_3"] . "</td><td>" .
-					"<form name='joinTeam' action='joinTeam.php' method='post'><input type='hidden' name='team_name' value='" . $row["team_name"] . "'><input type='submit' value='Join'></form></td></tr>";
-		    		}
-
-				echo "</table>";
 
 				$conn->close();
+
+				echo "<tr><td>Running</td><td>{$row['distance_run']}</td></tr>";
+				echo "<tr><td>Biking</td><td>{$row['distance_bike']}</td></tr>";
+				echo "<tr><td>Swimming</td><td>{$row['distance_swim']}</td></tr>";
 			?>
 		</table>
                <!-- </div> -->
@@ -132,8 +127,13 @@
 	</div>
 
 </body>
+</html>
+<script type="text/javascript" src="../scripts/navbar.js"></script>
 
-	<script type="text/javascript" src="../scripts/navbar.js"></script>
-
-	<script type="text/javascript" src="../scripts/sso.js"></script>
-	<script>startApp();</script>
+<!-- <script type="text/javascript" src="../scripts/sso.js"></script> -->
+<script>
+  function signOut() {
+	window.location.replace("https://appengine.google.com/_ah/logout?continue=http://ironbronco.jrcollins.com");
+	});
+  }
+</script>

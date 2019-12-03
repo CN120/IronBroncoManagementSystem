@@ -14,11 +14,20 @@ if ($conn->connect_error) {
      die("Connection failed: " . $conn->connect_error);
 }
 
+$user_team = "SELECT * FROM `User` WHERE email='$email';";
+$user_team_result = $conn->query($user_team);
+$user_team_result_row = $user_team_result->fetch_assoc();
+if (!empty($user_team_result_row["team_name"])) {
+     echo "<script>alert('You are already on a team!'); window.location.href = '../team';</script>";
+     exit();
+}
+
 $sql = "INSERT INTO `Team` (team_name, member_1) VALUES ('" . $_POST['team_name'] . "', '" . $email . "');";
 $conn->query($sql);
 
 $sql = "UPDATE `User` SET team_name='" . $_POST["team_name"] . "' WHERE email='" . $email . "';";
 $conn->query($sql);
+
 
 // echo "<script>alert($output);</script>";
 
@@ -28,6 +37,17 @@ $conn->query($sql);
 
 $conn->close();
 
-echo "<script>window.location.href = './';</script>";
-
 ?>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+     <body>
+          <form id="updateDistance" action="../profile/addDistance.php" method="post">
+               <input type="hidden" name="callbackURL" value="../team">
+               <input type="hidden" name="running" value="0">
+               <input type="hidden" name="swimming" value="0">
+               <input type="hidden" name="biking" value="0">
+          </form>
+
+          <?php echo "<script>document.getElementById('updateDistance').submit();</script>"; ?>
+     </body>
+</html>

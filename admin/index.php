@@ -1,7 +1,33 @@
+<?php
+     $servername = "pdb35.awardspace.net";
+     $username = "3010888_ironbroncodb";
+     $password = "YJSsQj636HAPZfq";
+     $dbname = "3010888_ironbroncodb";
+     $first_name = $_COOKIE["form_fname"];
+     $last_name = $_COOKIE["form_lname"];
+     $email = str_replace("%40", "@", $_COOKIE["form_email"]);
+
+     $conn = new mysqli($servername, $username, $password, $dbname);
+
+     if ($conn->connect_error) {
+          die("Connection failed: " . $conn->connect_error);
+     }
+
+     $sql = "SELECT * FROM `User` WHERE email='$email';";
+     $result = $conn->query($sql);
+     $row = $result->fetch_assoc();
+
+     if ($row["admin"] != 1) {
+          echo "<script>alert('You are not authorized to view this page.'); window.location.href = '../profile'</script>";
+     }
+
+     $conn->close();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
-	<title>My Team - SCU Iron Bronco</title>
+	<title>Admin Dashboard - SCU Iron Bronco</title>
 
      <!-- Meta Tags -->
      <meta charset="utf-8">
@@ -42,17 +68,8 @@
           <nav id="nav">
                <h1 class="IronLogo">Iron Bronco</h1>
                <div>
-
-     			<a class="navlink" href=".">Find a Team</a>
-     			<a class="navlink" href="../team">My Team</a>
-     			<a class="navlink" href="../profile">My Profile</a>
                </div>
 			   <div class="option_button_container">
-				   <a href="../profile">
-						<div class="option_button">
-							 <p>Enter Distance</p>
-						</div>
-					</a>
 				   <div class="option_button" id=signOutBtn>
 					 <span class="buttonText" id="signOut" onclick="signOut()">Sign Out</span>
 				   </div>
@@ -61,51 +78,27 @@
 	</header>
 
 	<div class="page_contents">
-		<h1>Find a Team</h1>
-		<table>
-               <tr>
-                    <th>Name</th>
-                    <th>Members</th>
-				<th>Join a Team</th>
-               </tr>
-               <?php
-				$servername = "pdb35.awardspace.net";
-				$username = "3010888_ironbroncodb";
-				$password = "YJSsQj636HAPZfq";
-				$dbname = "3010888_ironbroncodb";
-				$first_name = $_COOKIE["form_fname"];
-				$last_name = $_COOKIE["form_lname"];
-				$email = str_replace("%40", "@", $_COOKIE["form_email"]);
-
-				$conn = new mysqli($servername, $username, $password, $dbname);
-
-				if ($conn->connect_error) {
-					die("Connection failed: " . $conn->connect_error);
-				}
-
-				$sql = "SELECT * FROM `Team` WHERE member_3 IS NULL;";
-				$result = $conn->query($sql);
-
-				while($row = $result->fetch_assoc()) {
-			     	echo "<tr><td>" . $row["team_name"]. "</td><td>" . $row["member_1"] . ", " . $row["member_2"] . ", " . $row["member_3"] . "</td><td>" .
-					"<form name='joinTeam' action='joinTeam.php' method='post'><input type='hidden' name='team_name' value='" . $row["team_name"] . "'><input type='submit' value='Join'></form></td></tr>";
-		    		}
-
-				echo "</table>";
-
-				$conn->close();
-			?>
-
-          </table>
-
-		<h1>Create a Team</h1>
-		<form action="createTeam.php" method="post">
-			<p>Your team name must be alphanumeric.</p>
-			<label for="team_name">Team Name:</label>
-			<input type="text" pattern="^\w+$" name="team_name" value="">
-			<input type="submit" value="Create Team">
-		</form>
-
+		<h1>Admin Dashboard</h1>
+          <a href="./stats">Export Statistics</a>
+          <!-- <a href="./broadcast">Email all participants</a> -->
+          <a href="./toggle">Enable&#47;Disable Data Submission Privileges</a>
+          <br><br>
+          <div style="max-width:270px;">
+               <form action="wipe.php" method="post">
+                    <p><b>Wipe all</b> teams, recorded distances, and users (except admins):</p>
+                    <label for="adminAccept">Type 'yes' to confirm: </label>
+                    <input type="text" id="adminAccept" name="adminAccept" placeholder="Type 'yes' to wipe" value="">
+                    <input type="submit" name="submitAccept" value="Wipe All Data">
+               </form>
+               <br><br>
+               <form action="editAdmin.php" method="post">
+                    <label for="adminEmail">Make an existing user an admin or remove an existing admin: </label>
+                    <input type="email" id="adminEmail" name="adminEmail" placeholder="joe@school.edu" value="">
+                    <input type="submit" name="submitEmail" value="Make Admin">
+                    <input type="submit" name="removeEmail" value="Remove Admin">
+               </form>
+          </div>
+     </div>
 </body>
 
 	<script type="text/javascript" src="../scripts/navbar.js"></script>

@@ -1,77 +1,78 @@
+<?php setcookie("reload", 0, time()+3600); ?>
+
 <!DOCTYPE html>
 <html>
 <head>
-	<title>SCU Iron Bronco</title>
-
-     <!-- Meta Tags -->
-     <meta charset="utf-8">
+    <title>Sign In Page</title>
+	<meta charset="utf-8">
 	<meta name="author" content="Jeffrey Collins - jrcollins@scu.edu">
-     <meta name="author" content="Anthony Fenzl - afenzl@scu.edu">
-     <meta name="author" content="Chris Nelson - cnelson@scu.edu">
-	<meta name="description" content="Santa Clara University's Annual Iron Bronco Competition Management Service.">
-	<meta name="og:image" content="./resources/images/SCU.png">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-     <!-- Fonts -->
-     <link rel="stylesheet" href="https://use.typekit.net/mmd3tyo.css">
-
-     <!-- Styles -->
+	<meta name="author" content="Anthony Fenzl - afenzl@scu.edu">
+	<meta name="author" content="Chris Nelson - cnelson@scu.edu">
+    <!-- GOOGLE Stuff -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="735698212957-dvu2h24tapar68t9f8p7b66uhaamc96f.apps.googleusercontent.com">
+    <!-- Font -->
+    <link rel="stylesheet" href="https://use.typekit.net/mmd3tyo.css">
+    <!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="./css/master.css">
-
-     <!-- Scripts -->
-	 <script src="https://apis.google.com/js/api:client.js"></script>
-	 <script src="./scripts/sso.js"></script>
-
-	<!-- <link rel="shortcut icon" type="image/png" href="/resources/0.jpg"/> -->
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
-
-
 </head>
-
 <body>
-	<div class="g-signin2" data-onsuccess="onSignIn" data-theme="light"></div>
-     <div class="page_mask"></div>
+    <div class="page_contents">
+        <h1 class="IronLogo">Iron Bronco</h1>
+        <img class = bronco src="./resources/images/bronco.png" alt="SCU Bronco" width="250">
+        <div class="g-signin2" data-theme="dark" data-onsuccess="onSignIn"></div>
+	</div>
 
-	<form id="userInfo" name="userInfo" action="./profile" method="get">
+    <script type="text/javascript" src="../scripts/navbar.js"></script>
+
+    <form id="userInfo" name="userInfo" action="./profile" method="get">
 		<input type="hidden" name="form_fname" id="form_fname" value="">
 		<input type="hidden" name="form_lname" id="form_lname" value="">
 		<input type="hidden" name="form_email" id="form_email" value="">
 	</form>
 
-	<header>
-		<div id="navopen">
-			<img src="./resources/images/navopen_alt.svg" alt="Button: Open Navbar">
-		</div>
-		<div id="navclose">
-			<img src="./resources/images/navclose.svg" alt="Button: Close Navbar">
-		</div>
-          <nav id="nav">
-               <h1 class="IronLogo">Iron Bronco</h1>
-               <div>
-     			<a class="navlink" href=".">Leaderboard</a>
-     			<a class="navlink" href="./find">Find a Team</a>
-     			<a class="navlink" href="./team">My Team</a>
-     			<a class="navlink" href="./profile">My Profile</a>
-               </div>
-               <div class="option_button_container">
-                    <div class="option_button">
-                         <p>Enter Distance</p>
-                    </div>
-					<div class="option_button" id=customBtn>
-				      <span class="buttonText" id="signin">Sign In</span>
-				    </div>
-				    <div class="option_button" id=signOutBtn>
-				      <span class="buttonText" id="signOut" onclick="signOut()">Sign Out</span>
-				    </div>
 
-               </div>
-		</nav>
-	</header>
-
-	<!-- <h1>POST Data:</h1>
-	<ul>
-	</ul> -->
 
 </body>
-<script>startApp();</script>
 </html>
+<script src="./scripts/sso.js"></script>
+
+<script>
+    function onSignIn(googleUser) {
+        var od_token = googleUser.getAuthResponse().id_token;
+        var auth2 = gapi.auth2.getAuthInstance();
+        var profile = googleUser.getBasicProfile();
+        auth2.disconnect();
+        console.log('ID: ' + profile.getId());
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail());
+        var email = profile.getEmail();
+        if (email.includes("scu.edu")){
+            document.getElementById("form_fname").value = profile.getGivenName();
+            document.getElementById("form_lname").value = profile.getFamilyName();
+            document.getElementById("form_email").value = profile.getEmail();
+            document.getElementById('userInfo').submit();
+        } else{
+            email='';
+            window.alert("Please use your SCU google apps login");
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut();
+            location.reload();
+        }
+
+
+
+    }
+</script>
+
+<!-- <a href="" onclick="signOut();">Sign out</a> -->
+<!-- <script>
+  function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+      window.location.href = "../ib.html";
+    });
+  }
+</script> -->

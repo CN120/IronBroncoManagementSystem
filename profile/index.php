@@ -1,8 +1,11 @@
 <?php
-	if (isset($_GET["form_fname"])) {
-		foreach ($_GET as $key => $value) {
-			setcookie($key, $value, time()+3600, '/');
-		}
+	if ($_COOKIE["reload"] == 0) {
+		setcookie("reload", 1, time()+3600, '/');
+		header("Refresh:0");
+	}
+
+	foreach ($_GET as $key => $value) {
+		setcookie($key, $value, time()+3600, '/');
 	}
 
 	$running_distance = 0;
@@ -29,9 +32,12 @@
 
 		if ($result->num_rows > 0) {
 			$row = $result->fetch_assoc();
-			$running_distance = $row["distance_run"];
-			$biking_distance = $row["distance_bike"];
-			$swimming_distance = $row["distance_swim"];
+			if ($row["admin"] == 1) {
+				echo "<script>window.location.href = '../admin';</script>";
+			}
+			$running_distance = round($row["distance_run"], 2);
+			$biking_distance = round($row["distance_bike"], 2);
+			$swimming_distance = round($row["distance_swim"], 2);
 		}
 
 		else {
@@ -65,8 +71,9 @@
 	<link rel="stylesheet" type="text/css" href="../css/master.css">
      <!-- <link rel="stylesheet" type="text/css" href="../css/profile.css"> -->
 
-	<!-- <link rel="shortcut icon" type="image/png" href="../resources/0.jpg"/> -->
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+	 <!-- GOOGLE Stuff -->
+     <script src="https://apis.google.com/js/platform.js" async defer></script>
+     <meta name="google-signin-client_id" content="735698212957-dvu2h24tapar68t9f8p7b66uhaamc96f.apps.googleusercontent.com">
 </head>
 
 <body>
@@ -82,28 +89,31 @@
           <nav id="nav">
                <h1 class="IronLogo">Iron Bronco</h1>
                <div>
-     			<a class="navlink" href="..">Leaderboard</a>
+
      			<a class="navlink" href="../find">Find a Team</a>
      			<a class="navlink" href="../team">My Team</a>
      			<a class="navlink" href=".">My Profile</a>
                </div>
-               <div class="option_button_container">
-                    <div class="option_button">
-                         <p>Enter Distance</p>
-                    </div>
-                    <div class="option_button">
-                         <p>Sign Out</p>
-                    </div>
+			   <div class="option_button_container">
+				   <a href="../profile">
+   					  <div class="option_button">
+   						   <p>Enter Distance</p>
+   					  </div>
+   				  </a>
+				    <div class="option_button" id=signOutBtn>
+				      <span class="buttonText" id="signOut" onclick="signOut()">Sign Out</span>
+				    </div>
+
                </div>
 		</nav>
 	</header>
 
 	<div class="page_contents">
 
-		<h1>My Profile</h1>
+		<h1>Hi, <?= $first_name ?>!</h1>
 		<div class="page_row">
                <div class="page_feature">
-                    <h2>Team Progress</h2>
+                    <h2>My Progress</h2>
      			<div class="page_feature_content">
 	     			<p>running: <?= $running_distance ?></p>
 						<p>cycling: <?= $biking_distance ?></p>
@@ -116,36 +126,47 @@
 			<div class="page_feature_content">
 				<form action="addDistance.php" method="post">
 					<label for="running">Running Distance:</label>
-					<input type="number" name="running" value="">
+					<input type="number" step="any" min="0" max="52" name="running" placeholder="0.0" value="">
 					<label for="biking">Biking Distance:</label>
-					<input type="number" name="biking" value="">
+					<input type="number" step="any" min="0" max="224" name="biking" placeholder="0.0" value="">
 					<label for="swimming">Swimming Distance:</label>
-					<input type="number" name="swimming" value="">
+					<input type="number" step="any" min="0" max="5" name="swimming" placeholder="0.0" value="">
 					<input type="hidden" name="callbackURL" value="./index.php">
 					<input type="submit" name="submit" value="Submit Distances">
 				</form>
 			</div>
 		</div>
 		</div>
-		<div class="page_row">
+		<!-- <div class="page_row">
 			<div class="page_feature">
 				<h2>Distance Entries</h2>
 				<div class="page_feature_content">
         	<p>date		type		distance</p>
 				</div>
 			</div>
-		</div>
-		<div class="page_row">
+		</div> -->
+		<!-- <div class="page_row">
 			<div class="page_feature">
 				<h2>Edit Profile</h2>
 				<div class="page_feature_content">
         	<p>full name</p>
 					<p>email</p>
-					<!-- <p>username</p> -->
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</div>
 
 	<script type="text/javascript" src="../scripts/navbar.js"></script>
+	<!-- <script type="text/javascript" src="../scripts/sso.js"></script> -->
+	<script>
+	  function signOut() {
+		window.location.replace("https://appengine.google.com/_ah/logout?continue=http://ironbronco.jrcollins.com")
+		// var auth2 = gapi.auth2.getAuthInstance();
+		// auth2.signOut().then(function () {
+		//   console.log('User signed out.');
+		//   window.location.href = "http://ironbronco.jrcollins.com";
+
+		//});
+	  }
+	</script>
 </body>
