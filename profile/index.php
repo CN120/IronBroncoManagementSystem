@@ -135,24 +135,23 @@
 			</div>
 		</div>
 		</div>
-		<div class="page_row">
+		<!-- <div class="page_row">
 			<div class="page_feature">
 				<h2>Distance Entries</h2>
 				<div class="page_feature_content">
         	<p>date		type		distance</p>
 				</div>
 			</div>
-		</div>
-		<div class="page_row">
+		</div> -->
+		<!-- <div class="page_row">
 			<div class="page_feature">
 				<h2>Edit Profile</h2>
 				<div class="page_feature_content">
         	<p>full name</p>
 					<p>email</p>
-					<!-- <p>username</p> -->
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</div>
 
 	<script type="text/javascript" src="../scripts/navbar.js"></script>
