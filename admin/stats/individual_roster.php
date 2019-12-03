@@ -8,7 +8,7 @@ header('Content-Disposition: attachment; filename=individuals_roster.csv');
 $output = fopen('php://output', 'w');
 
 // output the column headings
-fputcsv($output, array('Last Name', 'First Name', 'Email', 'Team Name', 'Admin?', 'Running', 'Biking', 'Swimming', 'Total'));
+fputcsv($output, array('Last Name', 'First Name', 'Email', 'Team Name', 'Admin?', 'Submitting?', 'Running', 'Biking', 'Swimming', 'Total'));
 
 // fetch the data
 $servername = "pdb35.awardspace.net";
@@ -21,7 +21,7 @@ if ($conn->connect_error) {
      die("Connection failed: " . $conn->connect_error);
 }
 
-$rows = $conn->query('SELECT last_name, first_name, email, team_name, admin, distance_run, distance_bike, distance_swim FROM User');
+$rows = $conn->query('SELECT last_name, first_name, email, team_name, admin, submitting, distance_run, distance_bike, distance_swim FROM User');
 
 // loop over the rows, outputting them
 while ($row = $rows->fetch_assoc()) {
